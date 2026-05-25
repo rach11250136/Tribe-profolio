@@ -3,113 +3,172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tribe Portfolio</title>
+    <title>Tribe Portfolio - Y2K Edition</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="desktop-container">
-        <!-- Desktop Header -->
-        <div class="desktop-header">
-            <div class="header-left">
-                <span class="time" id="time">10:30</span>
+    <!-- Y2K Background with stickers -->
+    <div class="y2k-background">
+        <!-- Floating stickers -->
+        <div class="sticker sticker-star">⭐</div>
+        <div class="sticker sticker-heart">💖</div>
+        <div class="sticker sticker-moon">🌙</div>
+        <div class="sticker sticker-star2">⭐</div>
+        <div class="sticker sticker-heart2">💕</div>
+        <div class="sticker sticker-ribbon">🎀</div>
+        <div class="sticker sticker-flower">🌸</div>
+        <div class="sticker sticker-star3">✨</div>
+        <div class="sticker sticker-peace">☮️</div>
+        <div class="sticker sticker-heart3">💗</div>
+    </div>
+
+    <!-- Left Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-icons">
+            <div class="sidebar-icon" data-page="about">
+                <div class="icon-pixel">👤</div>
+                <span>About</span>
             </div>
-            <div class="header-center">
-                Tribe Portfolio
+            <div class="sidebar-icon" data-page="portfolio">
+                <div class="icon-pixel">📁</div>
+                <span>Portfolio</span>
             </div>
-            <div class="header-right">
-                <i class="fas fa-wifi"></i>
-                <i class="fas fa-battery-full"></i>
+            <div class="sidebar-icon" data-page="skills">
+                <div class="icon-pixel">⭐</div>
+                <span>Skills</span>
+            </div>
+            <div class="sidebar-icon" data-page="projects">
+                <div class="icon-pixel">🎨</div>
+                <span>Projects</span>
+            </div>
+            <div class="sidebar-icon" data-page="contact">
+                <div class="icon-pixel">💌</div>
+                <span>Contact</span>
+            </div>
+            <div class="sidebar-icon" data-page="gallery">
+                <div class="icon-pixel">🖼️</div>
+                <span>Gallery</span>
             </div>
         </div>
+    </div>
 
-        <!-- Desktop Background with Icons -->
-        <div class="desktop-background">
-            <!-- Welcome Section -->
-            <div class="welcome-section">
-                <h1>Welcome to Your Tribe Portfolio</h1>
-                <p>Your creative space awaits</p>
+    <!-- Main Window Container -->
+    <div class="windows-container">
+        <!-- Main Profile Window -->
+        <div class="y2k-window main-window" style="left: 300px; top: 50px; width: 700px; z-index: 10;">
+            <div class="window-header" onmousedown="dragWindow(event, this)">
+                <div class="window-title">
+                    <span class="window-icon">■</span>
+                    <span>My Portfolio</span>
+                </div>
+                <div class="window-controls">
+                    <button class="win-btn">_</button>
+                    <button class="win-btn">□</button>
+                    <button class="win-btn">✕</button>
+                </div>
             </div>
-
-            <!-- Icon Grid -->
-            <div class="icon-grid">
-                <!-- About Icon -->
-                <div class="icon-container" data-page="about">
-                    <div class="icon-box">
-                        <i class="fas fa-user-circle"></i>
+            <div class="window-content">
+                <div class="profile-section">
+                    <div class="profile-art">
+                        <div class="anime-placeholder">
+                            <div class="placeholder-text">📸 Your Art Here!</div>
+                            <div class="placeholder-subtext">Add your character or photo</div>
+                        </div>
                     </div>
-                    <span class="icon-label">About</span>
-                </div>
-
-                <!-- Portfolio Icon -->
-                <div class="icon-container" data-page="portfolio">
-                    <div class="icon-box">
-                        <i class="fas fa-briefcase"></i>
+                    <div class="profile-info">
+                        <h2 class="profile-name">[ Your Name ]</h2>
+                        <p class="profile-bio">✨ Creative Portfolio ✨</p>
+                        <div class="status-bar">
+                            <div class="status-item">Status: <span class="status-online">● Online</span></div>
+                        </div>
                     </div>
-                    <span class="icon-label">Portfolio</span>
-                </div>
-
-                <!-- Skills Icon -->
-                <div class="icon-container" data-page="skills">
-                    <div class="icon-box">
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <span class="icon-label">Skills</span>
-                </div>
-
-                <!-- Projects Icon -->
-                <div class="icon-container" data-page="projects">
-                    <div class="icon-box">
-                        <i class="fas fa-cube"></i>
-                    </div>
-                    <span class="icon-label">Projects</span>
-                </div>
-
-                <!-- Experience Icon -->
-                <div class="icon-container" data-page="experience">
-                    <div class="icon-box">
-                        <i class="fas fa-rocket"></i>
-                    </div>
-                    <span class="icon-label">Experience</span>
-                </div>
-
-                <!-- Contact Icon -->
-                <div class="icon-container" data-page="contact">
-                    <div class="icon-box">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <span class="icon-label">Contact</span>
-                </div>
-
-                <!-- Gallery Icon -->
-                <div class="icon-container" data-page="gallery">
-                    <div class="icon-box">
-                        <i class="fas fa-images"></i>
-                    </div>
-                    <span class="icon-label">Gallery</span>
-                </div>
-
-                <!-- Blog Icon -->
-                <div class="icon-container" data-page="blog">
-                    <div class="icon-box">
-                        <i class="fas fa-pen-fancy"></i>
-                    </div>
-                    <span class="icon-label">Blog</span>
                 </div>
             </div>
         </div>
 
-        <!-- Desktop Taskbar -->
-        <div class="desktop-taskbar">
-            <div class="taskbar-item">
-                <i class="fas fa-folder"></i>
+        <!-- Task Manager Window -->
+        <div class="y2k-window task-window" style="right: 50px; top: 50px; width: 280px; z-index: 9;">
+            <div class="window-header" onmousedown="dragWindow(event, this)">
+                <div class="window-title">
+                    <span class="window-icon">■</span>
+                    <span>Task Manager</span>
+                </div>
+                <div class="window-controls">
+                    <button class="win-btn">_</button>
+                    <button class="win-btn">□</button>
+                    <button class="win-btn">✕</button>
+                </div>
             </div>
-            <div class="taskbar-item">
-                <i class="fas fa-globe"></i>
+            <div class="window-content task-content">
+                <div class="task-stats">
+                    <div class="stat-box">
+                        <div class="stat-number">0</div>
+                        <div class="stat-label">Projects</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">0</div>
+                        <div class="stat-label">Skills</div>
+                    </div>
+                </div>
+                <div class="task-items">
+                    <div class="task-item">
+                        <input type="checkbox"> Art
+                    </div>
+                    <div class="task-item">
+                        <input type="checkbox"> Design
+                    </div>
+                    <div class="task-item">
+                        <input type="checkbox"> Code
+                    </div>
+                </div>
             </div>
-            <div class="taskbar-item active">
-                <i class="fas fa-home"></i>
+        </div>
+
+        <!-- Chat Window -->
+        <div class="y2k-window chat-window" style="left: 300px; top: 400px; width: 700px; z-index: 8;">
+            <div class="window-header" onmousedown="dragWindow(event, this)">
+                <div class="window-title">
+                    <span class="window-icon">■</span>
+                    <span>💬 Messages</span>
+                </div>
+                <div class="window-controls">
+                    <button class="win-btn">_</button>
+                    <button class="win-btn">□</button>
+                    <button class="win-btn">✕</button>
+                </div>
             </div>
+            <div class="window-content chat-content">
+                <div class="chat-messages">
+                    <div class="chat-message">
+                        <span class="message-author">[System]</span>
+                        <span class="message-text">✨ Welcome to the portfolio! ✨</span>
+                    </div>
+                    <div class="chat-message">
+                        <span class="message-author">[You]</span>
+                        <span class="message-text">Thanks for visiting my Y2K portfolio!</span>
+                    </div>
+                    <div class="chat-message">
+                        <span class="message-author">[Visitor]</span>
+                        <span class="message-text">This is so cute!! 💖</span>
+                    </div>
+                    <div class="chat-message">
+                        <span class="message-author">[You]</span>
+                        <span class="message-text">Feel free to explore ~ add your own vibe!</span>
+                    </div>
+                </div>
+                <input type="text" class="chat-input" placeholder="Type message...">
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Taskbar -->
+    <div class="taskbar">
+        <div class="taskbar-start">
+            <span class="start-button">🌸 Start</span>
+        </div>
+        <div class="taskbar-clock">
+            <span id="clock">10:30</span>
         </div>
     </div>
 
