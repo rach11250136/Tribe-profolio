@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tribe Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="desktop-container">
+        <!-- Desktop Header -->
+        <div class="desktop-header">
+            <div class="header-left">
+                <span class="time" id="time">10:30</span>
+            </div>
+            <div class="header-center">
+                Tribe Portfolio
+            </div>
+            <div class="header-right">
+                <i class="fas fa-wifi"></i>
+                <i class="fas fa-battery-full"></i>
+            </div>
+        </div>
+
+        <!-- Desktop Background with Icons -->
+        <div class="desktop-background">
+            <!-- Welcome Section -->
+            <div class="welcome-section">
+                <h1>Welcome to Your Tribe Portfolio</h1>
+                <p>Your creative space awaits</p>
+            </div>
+
+            <!-- Icon Grid -->
+            <div class="icon-grid">
+                <!-- About Icon -->
+                <div class="icon-container" data-page="about">
+                    <div class="icon-box">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <span class="icon-label">About</span>
+                </div>
+
+                <!-- Portfolio Icon -->
+                <div class="icon-container" data-page="portfolio">
+                    <div class="icon-box">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <span class="icon-label">Portfolio</span>
+                </div>
+
+                <!-- Skills Icon -->
+                <div class="icon-container" data-page="skills">
+                    <div class="icon-box">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <span class="icon-label">Skills</span>
+                </div>
+
+                <!-- Projects Icon -->
+                <div class="icon-container" data-page="projects">
+                    <div class="icon-box">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <span class="icon-label">Projects</span>
+                </div>
+
+                <!-- Experience Icon -->
+                <div class="icon-container" data-page="experience">
+                    <div class="icon-box">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <span class="icon-label">Experience</span>
+                </div>
+
+                <!-- Contact Icon -->
+                <div class="icon-container" data-page="contact">
+                    <div class="icon-box">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <span class="icon-label">Contact</span>
+                </div>
+
+                <!-- Gallery Icon -->
+                <div class="icon-container" data-page="gallery">
+                    <div class="icon-box">
+                        <i class="fas fa-images"></i>
+                    </div>
+                    <span class="icon-label">Gallery</span>
+                </div>
+
+                <!-- Blog Icon -->
+                <div class="icon-container" data-page="blog">
+                    <div class="icon-box">
+                        <i class="fas fa-pen-fancy"></i>
+                    </div>
+                    <span class="icon-label">Blog</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Desktop Taskbar -->
+        <div class="desktop-taskbar">
+            <div class="taskbar-item">
+                <i class="fas fa-folder"></i>
+            </div>
+            <div class="taskbar-item">
+                <i class="fas fa-globe"></i>
+            </div>
+            <div class="taskbar-item active">
+                <i class="fas fa-home"></i>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
