@@ -1,100 +1,118 @@
-// Update time in header
-function updateTime() {
+// Update time in taskbar
+function updateClock() {
     const now = new Date();
     const hours = String(now.getHours()).padStart(2, '0');
     const minutes = String(now.getMinutes()).padStart(2, '0');
-    document.getElementById('time').textContent = `${hours}:${minutes}`;
+    const clockElement = document.getElementById('clock');
+    if (clockElement) {
+        clockElement.textContent = `${hours}:${minutes}`;
+    }
 }
 
-// Update time every minute
-setInterval(updateTime, 60000);
-updateTime();
+// Update clock every minute
+setInterval(updateClock, 60000);
+updateClock();
 
-// Add click handlers to icon containers
-document.querySelectorAll('.icon-container').forEach(container => {
-    container.addEventListener('click', function() {
-        const page = this.dataset.page;
-        handleNavigation(page);
+// Window dragging functionality
+let activeWindow = null;
+let offset = { x: 0, y: 0 };
+
+function dragWindow(e, header) {
+    activeWindow = header.closest('.y2k-window');
+    if (!activeWindow) return;
+    
+    // Bring to front
+    document.querySelectorAll('.y2k-window').forEach(w => w.style.zIndex = 8);
+    activeWindow.style.zIndex = 50;
+    
+    const rect = activeWindow.getBoundingClientRect();
+    offset.x = e.clientX - rect.left;
+    offset.y = e.clientY - rect.top;
+    
+    document.addEventListener('mousemove', moveWindow);
+    document.addEventListener('mouseup', stopDrag);
+    e.preventDefault();
+}
+
+function moveWindow(e) {
+    if (!activeWindow) return;
+    activeWindow.style.left = (e.clientX - offset.x) + 'px';
+    activeWindow.style.top = (e.clientY - offset.y) + 'px';
+}
+
+function stopDrag() {
+    document.removeEventListener('mousemove', moveWindow);
+    document.removeEventListener('mouseup', stopDrag);
+    activeWindow = null;
+}
+
+// Add click handler to bring windows to front
+document.querySelectorAll('.y2k-window').forEach(win => {
+    win.addEventListener('click', function() {
+        document.querySelectorAll('.y2k-window').forEach(w => w.style.zIndex = 8);
+        this.style.zIndex = 50;
     });
+});
 
-    // Add double-click animation
-    container.addEventListener('dblclick', function() {
+// Sidebar navigation
+document.querySelectorAll('.sidebar-icon').forEach(icon => {
+    icon.addEventListener('click', function() {
+        const page = this.dataset.page;
+        console.log(`Navigating to ${page}`);
+        // Add your navigation logic here
+    });
+});
+
+// Minimize/Maximize buttons
+document.querySelectorAll('.win-btn').forEach((btn, index) => {
+    btn.addEventListener('click', function(e) {
+        const window = this.closest('.y2k-window');
+        e.stopPropagation();
+        
+        if (index === 0) {
+            // Minimize button
+            window.style.opacity = '0.5';
+            window.style.pointerEvents = 'none';
+        } else if (index === 1) {
+            // Maximize button
+            window.style.width = '90%';
+            window.style.height = '90%';
+            window.style.left = '5%';
+            window.style.top = '5%';
+        } else if (index === 2) {
+            // Close button
+            window.style.display = 'none';
+        }
+    });
+});
+
+// Chat functionality
+const chatInput = document.querySelector('.chat-input');
+if (chatInput) {
+    chatInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter' && this.value.trim()) {
+            const chatMessages = document.querySelector('.chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'chat-message';
+            messageDiv.innerHTML = `<span class="message-author">[You]</span> <span class="message-text">${this.value}</span>`;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            this.value = '';
+        }
+    });
+}
+
+// Y2K sticker animation enhancement
+document.querySelectorAll('.sticker').forEach(sticker => {
+    sticker.addEventListener('click', function() {
         this.style.animation = 'none';
         setTimeout(() => {
-            this.style.animation = '';
-        }, 10);
+            this.style.animation = 'float 3s ease-in-out infinite';
+        }, 100);
     });
 });
 
-// Navigation handler (placeholder for future pages)
-function handleNavigation(page) {
-    console.log(`Navigating to ${page}`);
-    // Future implementation: redirect to different pages or load content
-}
-
-// Add ripple effect on click
-document.querySelectorAll('.icon-container').forEach(container => {
-    container.addEventListener('click', function(e) {
-        const ripple = document.createElement('span');
-        const rect = this.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        const x = e.clientX - rect.left - size / 2;
-        const y = e.clientY - rect.top - size / 2;
-
-        ripple.style.width = ripple.style.height = size + 'px';
-        ripple.style.left = x + 'px';
-        ripple.style.top = y + 'px';
-        ripple.classList.add('ripple');
-
-        this.appendChild(ripple);
-
-        setTimeout(() => ripple.remove(), 600);
-    });
-});
-
-// Add CSS for ripple effect dynamically
-const style = document.createElement('style');
-style.textContent = `
-    .icon-container {
-        position: relative;
-        overflow: visible;
-    }
-
-    .ripple {
-        position: absolute;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.5);
-        transform: scale(0);
-        animation: ripple-animation 0.6s ease-out;
-        pointer-events: none;
-    }
-
-    @keyframes ripple-animation {
-        to {
-            transform: scale(4);
-            opacity: 0;
-        }
-    }
-`;
-document.head.appendChild(style);
-
-// Keyboard shortcuts
-document.addEventListener('keydown', function(e) {
-    // Alt+Number to quickly access pages
-    if (e.altKey) {
-        const iconContainers = document.querySelectorAll('.icon-container');
-        const key = parseInt(e.key);
-        if (key > 0 && key <= iconContainers.length) {
-            iconContainers[key - 1].click();
-        }
-    }
-});
-
-// Add subtle mouse tracking for background effect (optional)
-document.addEventListener('mousemove', function(e) {
-    const background = document.querySelector('.desktop-background');
-    const x = (e.clientX / window.innerWidth) * 100;
-    const y = (e.clientY / window.innerHeight) * 100;
-    // Optional: uncomment to add mouse tracking effect
-    // background.style.backgroundPosition = `${x}% ${y}%`;
+// Taskbar start menu (placeholder)
+document.querySelector('.taskbar-start').addEventListener('click', function() {
+    alert('Start Menu - Coming Soon! 🌸');
 });
