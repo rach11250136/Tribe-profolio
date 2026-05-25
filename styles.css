@@ -1,0 +1,339 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+    background: #f5f5f5;
+}
+
+/* Desktop Container */
+.desktop-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: white;
+}
+
+/* Desktop Header (Top Bar) */
+.desktop-header {
+    height: 28px;
+    background: rgba(255, 255, 255, 0.95);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #333;
+    backdrop-filter: blur(10px);
+}
+
+.header-left, .header-right {
+    flex: 1;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.header-right {
+    justify-content: flex-end;
+}
+
+.header-center {
+    flex: 2;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.time {
+    font-weight: 600;
+}
+
+/* Desktop Background */
+.desktop-background {
+    flex: 1;
+    background: linear-gradient(90deg, 
+        #ffff99 0%,
+        #fff4e6 10%,
+        #ffe6f0 20%,
+        #ffccee 30%,
+        #ffb3e6 40%,
+        #f0ccff 50%,
+        #d9b3ff 60%,
+        #b3ccff 70%,
+        #99ccff 80%,
+        #6699ff 90%,
+        #0052cc 100%
+    );
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 40px;
+}
+
+/* Welcome Section */
+.welcome-section {
+    text-align: center;
+    margin-bottom: 50px;
+    animation: fadeInDown 0.8s ease-out;
+}
+
+.welcome-section h1 {
+    font-size: 48px;
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    letter-spacing: -1px;
+}
+
+.welcome-section p {
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 300;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Icon Grid */
+.icon-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    padding: 40px 60px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Icon Container */
+.icon-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    animation: fadeInUp 0.6s ease-out;
+    animation-fill-mode: both;
+    transition: all 0.3s ease;
+}
+
+.icon-container:nth-child(1) { animation-delay: 0.1s; }
+.icon-container:nth-child(2) { animation-delay: 0.2s; }
+.icon-container:nth-child(3) { animation-delay: 0.3s; }
+.icon-container:nth-child(4) { animation-delay: 0.4s; }
+.icon-container:nth-child(5) { animation-delay: 0.5s; }
+.icon-container:nth-child(6) { animation-delay: 0.6s; }
+.icon-container:nth-child(7) { animation-delay: 0.7s; }
+.icon-container:nth-child(8) { animation-delay: 0.8s; }
+
+.icon-container:hover {
+    transform: scale(1.15) translateY(-10px);
+}
+
+.icon-container:active .icon-box {
+    transform: scale(0.95);
+}
+
+/* Icon Box */
+.icon-box {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.5));
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    margin-bottom: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, 
+        rgba(200, 150, 255, 0.3) 0%,
+        rgba(150, 180, 255, 0.2) 50%,
+        rgba(200, 150, 255, 0.3) 100%
+    );
+    color: #6666cc;
+}
+
+.icon-box:hover {
+    background: linear-gradient(135deg, 
+        rgba(200, 150, 255, 0.5) 0%,
+        rgba(150, 180, 255, 0.4) 50%,
+        rgba(200, 150, 255, 0.5) 100%
+    );
+    box-shadow: 0 12px 35px rgba(102, 102, 204, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+/* Icon Label */
+.icon-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    letter-spacing: 0.3px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.icon-container:hover .icon-label {
+    color: white;
+    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Desktop Taskbar */
+.desktop-taskbar {
+    height: 50px;
+    background: rgba(255, 255, 255, 0.95);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
+    backdrop-filter: blur(10px);
+}
+
+.taskbar-item {
+    width: 40px;
+    height: 40px;
+    background: rgba(200, 150, 255, 0.1);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #8877cc;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(200, 150, 255, 0.2);
+}
+
+.taskbar-item:hover {
+    background: rgba(200, 150, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.taskbar-item.active {
+    background: linear-gradient(135deg, rgba(200, 150, 255, 0.3), rgba(150, 180, 255, 0.2));
+    box-shadow: 0 4px 15px rgba(102, 102, 204, 0.2);
+}
+
+/* Animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .icon-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        padding: 30px 40px;
+    }
+
+    .welcome-section h1 {
+        font-size: 36px;
+    }
+
+    .welcome-section p {
+        font-size: 16px;
+    }
+
+    .icon-box {
+        width: 80px;
+        height: 80px;
+        font-size: 36px;
+    }
+}
+
+@media (max-width: 768px) {
+    .icon-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+        padding: 25px 20px;
+    }
+
+    .welcome-section h1 {
+        font-size: 28px;
+    }
+
+    .welcome-section p {
+        font-size: 14px;
+    }
+
+    .icon-box {
+        width: 70px;
+        height: 70px;
+        font-size: 28px;
+    }
+
+    .icon-label {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .icon-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        padding: 20px 10px;
+    }
+
+    .welcome-section {
+        margin-bottom: 30px;
+    }
+
+    .welcome-section h1 {
+        font-size: 22px;
+    }
+
+    .welcome-section p {
+        font-size: 12px;
+    }
+
+    .icon-box {
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+    }
+
+    .icon-label {
+        font-size: 11px;
+    }
+
+    .desktop-header {
+        font-size: 10px;
+        padding: 0 10px;
+    }
+}
