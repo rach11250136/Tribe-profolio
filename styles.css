@@ -5,9 +5,12 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Pixelify Sans', 'Press Start 2P', monospace;
     overflow: hidden;
     background: #f5f5f5;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
 }
 
 /* Desktop Container */
@@ -23,13 +26,13 @@ body {
 .desktop-header {
     height: 28px;
     background: rgba(255, 255, 255, 0.95);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 3px solid #8877cc;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
-    font-size: 12px;
-    font-weight: 500;
+    font-size: 11px;
+    font-weight: 700;
     color: #333;
     backdrop-filter: blur(10px);
 }
@@ -48,30 +51,46 @@ body {
 .header-center {
     flex: 2;
     text-align: center;
-    font-weight: 600;
-    letter-spacing: 0.5px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #6666cc;
+    text-shadow: 2px 2px 0 rgba(200, 150, 255, 0.3);
 }
 
 .time {
-    font-weight: 600;
+    font-weight: 700;
+    font-size: 12px;
 }
 
-/* Desktop Background */
+/* 8-Bit Pixel Background */
 .desktop-background {
     flex: 1;
-    background: linear-gradient(90deg, 
-        #ffff99 0%,
-        #fff4e6 10%,
-        #ffe6f0 20%,
-        #ffccee 30%,
-        #ffb3e6 40%,
-        #f0ccff 50%,
-        #d9b3ff 60%,
-        #b3ccff 70%,
-        #99ccff 80%,
-        #6699ff 90%,
-        #0052cc 100%
-    );
+    background: 
+        linear-gradient(90deg,
+            #ffff99 0%,
+            #ffff99 12.5%,
+            #fff4e6 12.5%,
+            #fff4e6 25%,
+            #ffe6f0 25%,
+            #ffe6f0 37.5%,
+            #ffccee 37.5%,
+            #ffccee 50%,
+            #ffb3e6 50%,
+            #ffb3e6 62.5%,
+            #f0ccff 62.5%,
+            #f0ccff 75%,
+            #d9b3ff 75%,
+            #d9b3ff 87.5%,
+            #b3ccff 87.5%,
+            #b3ccff 100%
+        ),
+        linear-gradient(180deg,
+            rgba(255, 255, 255, 0.1) 0%,
+            rgba(255, 255, 255, 0.1) 8px,
+            transparent 8px,
+            transparent 16px
+        );
+    background-size: 100% 100%, 100% 16px;
     overflow: hidden;
     position: relative;
     display: flex;
@@ -79,29 +98,54 @@ body {
     justify-content: flex-start;
     align-items: center;
     padding-top: 40px;
+    image-rendering: pixelated;
+}
+
+/* Scanline effect overlay */
+.desktop-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.03) 0px,
+        rgba(0, 0, 0, 0.03) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    pointer-events: none;
+    z-index: 1;
 }
 
 /* Welcome Section */
 .welcome-section {
     text-align: center;
     margin-bottom: 50px;
-    animation: fadeInDown 0.8s ease-out;
+    animation: pixelFadeIn 0.8s steps(8, end);
+    position: relative;
+    z-index: 2;
 }
 
 .welcome-section h1 {
-    font-size: 48px;
-    color: rgba(255, 255, 255, 0.95);
+    font-size: 32px;
+    color: rgba(102, 102, 204, 1);
     font-weight: 700;
     margin-bottom: 10px;
-    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    letter-spacing: -1px;
+    text-shadow: 3px 3px 0 rgba(200, 150, 255, 0.4);
+    letter-spacing: 3px;
+    font-family: 'Press Start 2P', monospace;
 }
 
 .welcome-section p {
-    font-size: 20px;
-    color: rgba(255, 255, 255, 0.85);
-    font-weight: 300;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    font-size: 12px;
+    color: rgba(102, 102, 204, 0.9);
+    font-weight: 700;
+    text-shadow: 2px 2px 0 rgba(200, 150, 255, 0.3);
+    letter-spacing: 1px;
+    font-family: 'Press Start 2P', monospace;
 }
 
 /* Icon Grid */
@@ -113,6 +157,8 @@ body {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
+    position: relative;
+    z-index: 2;
 }
 
 /* Icon Container */
@@ -122,9 +168,9 @@ body {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    animation: fadeInUp 0.6s ease-out;
+    animation: pixelBounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     animation-fill-mode: both;
-    transition: all 0.3s ease;
+    transition: all 0.1s steps(2, end);
 }
 
 .icon-container:nth-child(1) { animation-delay: 0.1s; }
@@ -137,71 +183,98 @@ body {
 .icon-container:nth-child(8) { animation-delay: 0.8s; }
 
 .icon-container:hover {
-    transform: scale(1.15) translateY(-10px);
+    transform: scale(1.2) translateY(-8px);
+    filter: drop-shadow(0 4px 0 rgba(102, 102, 204, 0.4));
 }
 
-.icon-container:active .icon-box {
-    transform: scale(0.95);
+.icon-container:active {
+    transform: scale(0.95) translateY(-2px);
 }
 
-/* Icon Box */
+/* Icon Box - 8-bit style */
 .icon-box {
     width: 100px;
     height: 100px;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.5));
-    border-radius: 20px;
+    background: linear-gradient(135deg, 
+        rgba(200, 150, 255, 0.4) 0%,
+        rgba(150, 180, 255, 0.3) 50%,
+        rgba(200, 150, 255, 0.4) 100%
+    );
+    border: 4px solid #6666cc;
+    border-radius: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 48px;
     margin-bottom: 15px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15),
-                inset 0 1px 0 rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    transition: all 0.3s ease;
-    background: linear-gradient(135deg, 
-        rgba(200, 150, 255, 0.3) 0%,
-        rgba(150, 180, 255, 0.2) 50%,
-        rgba(200, 150, 255, 0.3) 100%
-    );
+    box-shadow: 
+        4px 4px 0 rgba(102, 102, 204, 0.3),
+        inset -2px -2px 0 rgba(0, 0, 0, 0.1),
+        inset 2px 2px 0 rgba(255, 255, 255, 0.5);
     color: #6666cc;
+    transition: all 0.1s steps(2, end);
+    position: relative;
+    overflow: hidden;
+}
+
+.icon-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.05) 0px,
+        rgba(255, 255, 255, 0.05) 2px,
+        transparent 2px,
+        transparent 4px
+    );
+    pointer-events: none;
 }
 
 .icon-box:hover {
     background: linear-gradient(135deg, 
-        rgba(200, 150, 255, 0.5) 0%,
-        rgba(150, 180, 255, 0.4) 50%,
-        rgba(200, 150, 255, 0.5) 100%
+        rgba(200, 150, 255, 0.6) 0%,
+        rgba(150, 180, 255, 0.5) 50%,
+        rgba(200, 150, 255, 0.6) 100%
     );
-    box-shadow: 0 12px 35px rgba(102, 102, 204, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    box-shadow: 
+        6px 6px 0 rgba(102, 102, 204, 0.5),
+        inset -2px -2px 0 rgba(0, 0, 0, 0.1),
+        inset 2px 2px 0 rgba(255, 255, 255, 0.6);
+    border-color: #8877cc;
 }
 
-/* Icon Label */
+/* Icon Label - 8-bit text */
 .icon-label {
-    font-size: 14px;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.95);
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    letter-spacing: 0.3px;
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(102, 102, 204, 1);
+    text-shadow: 2px 2px 0 rgba(200, 150, 255, 0.3);
+    letter-spacing: 1px;
     text-align: center;
-    transition: all 0.3s ease;
+    transition: all 0.1s steps(2, end);
+    font-family: 'Press Start 2P', monospace;
 }
 
 .icon-container:hover .icon-label {
-    color: white;
-    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+    color: #6666cc;
+    text-shadow: 3px 3px 0 rgba(200, 150, 255, 0.5);
 }
 
-/* Desktop Taskbar */
+/* Desktop Taskbar - 8-bit style */
 .desktop-taskbar {
     height: 50px;
-    background: rgba(255, 255, 255, 0.95);
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    background: linear-gradient(180deg,
+        rgba(255, 255, 255, 0.98) 0%,
+        rgba(240, 240, 255, 0.95) 100%
+    );
+    border-top: 4px solid #8877cc;
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 15px;
     align-items: center;
     backdrop-filter: blur(10px);
 }
@@ -209,48 +282,79 @@ body {
 .taskbar-item {
     width: 40px;
     height: 40px;
-    background: rgba(200, 150, 255, 0.1);
-    border-radius: 10px;
+    background: linear-gradient(135deg, 
+        rgba(200, 150, 255, 0.2), 
+        rgba(150, 180, 255, 0.15)
+    );
+    border: 3px solid #8877cc;
+    border-radius: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
-    color: #8877cc;
+    font-size: 18px;
+    color: #6666cc;
     cursor: pointer;
-    transition: all 0.3s ease;
-    border: 1px solid rgba(200, 150, 255, 0.2);
+    transition: all 0.1s steps(2, end);
+    box-shadow: 
+        2px 2px 0 rgba(102, 102, 204, 0.2),
+        inset -1px -1px 0 rgba(0, 0, 0, 0.05),
+        inset 1px 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .taskbar-item:hover {
-    background: rgba(200, 150, 255, 0.2);
+    background: linear-gradient(135deg, 
+        rgba(200, 150, 255, 0.35), 
+        rgba(150, 180, 255, 0.25)
+    );
     transform: scale(1.1);
+    box-shadow: 
+        3px 3px 0 rgba(102, 102, 204, 0.3),
+        inset -1px -1px 0 rgba(0, 0, 0, 0.05),
+        inset 1px 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.taskbar-item:active {
+    transform: scale(0.95);
+    box-shadow: 
+        1px 1px 0 rgba(102, 102, 204, 0.2),
+        inset -1px -1px 0 rgba(0, 0, 0, 0.1),
+        inset 1px 1px 0 rgba(255, 255, 255, 0.4);
 }
 
 .taskbar-item.active {
-    background: linear-gradient(135deg, rgba(200, 150, 255, 0.3), rgba(150, 180, 255, 0.2));
-    box-shadow: 0 4px 15px rgba(102, 102, 204, 0.2);
+    background: linear-gradient(135deg, 
+        rgba(200, 150, 255, 0.4), 
+        rgba(150, 180, 255, 0.3)
+    );
+    box-shadow: 
+        3px 3px 0 rgba(102, 102, 204, 0.4),
+        inset -2px -2px 0 rgba(0, 0, 0, 0.1),
+        inset 2px 2px 0 rgba(255, 255, 255, 0.6);
 }
 
-/* Animations */
-@keyframes fadeInDown {
-    from {
+/* 8-bit Animations */
+@keyframes pixelFadeIn {
+    0% {
         opacity: 0;
-        transform: translateY(-30px);
+        transform: translateY(-20px);
     }
-    to {
+    100% {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
-@keyframes fadeInUp {
-    from {
+@keyframes pixelBounce {
+    0% {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(20px) scale(0.8);
     }
-    to {
+    70% {
+        transform: translateY(-5px) scale(1.05);
+    }
+    100% {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
     }
 }
 
@@ -263,11 +367,11 @@ body {
     }
 
     .welcome-section h1 {
-        font-size: 36px;
+        font-size: 24px;
     }
 
     .welcome-section p {
-        font-size: 16px;
+        font-size: 10px;
     }
 
     .icon-box {
@@ -285,21 +389,22 @@ body {
     }
 
     .welcome-section h1 {
-        font-size: 28px;
+        font-size: 18px;
     }
 
     .welcome-section p {
-        font-size: 14px;
+        font-size: 9px;
     }
 
     .icon-box {
         width: 70px;
         height: 70px;
         font-size: 28px;
+        border: 3px solid #6666cc;
     }
 
     .icon-label {
-        font-size: 12px;
+        font-size: 10px;
     }
 }
 
@@ -315,25 +420,26 @@ body {
     }
 
     .welcome-section h1 {
-        font-size: 22px;
+        font-size: 16px;
     }
 
     .welcome-section p {
-        font-size: 12px;
+        font-size: 8px;
     }
 
     .icon-box {
         width: 60px;
         height: 60px;
         font-size: 24px;
+        border: 2px solid #6666cc;
     }
 
     .icon-label {
-        font-size: 11px;
+        font-size: 9px;
     }
 
     .desktop-header {
-        font-size: 10px;
+        font-size: 9px;
         padding: 0 10px;
     }
 }
